@@ -1,0 +1,11 @@
+#!/bin/bash
+# script to compile for_loop_short.c
+
+clang -static -emit-llvm -march=armv80a -mfloat-abi=soft -target arm-elf for_loop_short.c -c -o for_loop.bc
+
+llc -O3 -march=arm for_loop.bc -o for_loop.s
+
+~/dev/toolchain/arm-2008q3/bin/arm-none-linux-gnueabi-gcc -static a.s -o for_loop.st
+
+
+
